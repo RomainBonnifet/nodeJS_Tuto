@@ -9,7 +9,10 @@ const port = 3000
 
 
 
-app.use(favicon(__dirname + '/favicon.ico')).use(morgan('dev')).use(bodyParser.json())
+app
+    .use(favicon(__dirname + '/favicon.ico'))
+    .use(morgan('dev'))
+    .use(bodyParser.json())
 
 sequelize.initDb()
 
@@ -18,5 +21,11 @@ require('./src/routes/findPokemonByPk')(app)
 require('./src/routes/createPokemon')(app)
 require('./src/routes/updatePokemon')(app)
 require('./src/routes/deletePokemon')(app)
+
+//Gestion des erreurs
+app.use(({res})=>{
+    const message = 'Impossible de trouver la ressource demandée, URL incorrect'
+    res.status(404).json({message})
+})
 
 app.listen(port, ()=> console.log(`Appli Node démarrée. Adresse : http://localhost:${port}`));
