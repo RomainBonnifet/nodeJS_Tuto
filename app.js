@@ -28,4 +28,4 @@ app.use(({res})=>{
     res.status(404).json({message})
 })
 
-app.listen(port, ()=> console.log(`Appli Node démarrée. Adresse : http://localhost:${port}`));
+app.listen(port, ()=> console.log(`Appli Node démarrée. Adresse : http://localhost:${port}`))
